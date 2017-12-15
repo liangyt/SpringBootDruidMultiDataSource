@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liangyt.mapper.two.DsTwoMapper">
+  <resultMap id="BaseResultMap" type="com.liangyt.entity.datasourcetwo.DsTwo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="two" jdbcType="VARCHAR" property="two" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ds_two
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.liangyt.entity.datasourcetwo.DsTwo">
+    insert into ds_two (id, two)
+    values (#{id,jdbcType=INTEGER}, #{two,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.liangyt.entity.datasourcetwo.DsTwo">
+    update ds_two
+    set two = #{two,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, two
+    from ds_two
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, two
+    from ds_two
+  </select>
+</mapper>

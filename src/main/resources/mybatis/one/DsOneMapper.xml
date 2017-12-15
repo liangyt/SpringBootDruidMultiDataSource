@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.liangyt.mapper.one.DsOneMapper">
+  <resultMap id="BaseResultMap" type="com.liangyt.entity.datasourceone.DsOne">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="one" jdbcType="VARCHAR" property="one" />
+  </resultMap>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ds_one
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.liangyt.entity.datasourceone.DsOne">
+    insert into ds_one (id, one)
+    values (#{id,jdbcType=INTEGER}, #{one,jdbcType=VARCHAR})
+  </insert>
+
+  <update id="updateByPrimaryKey" parameterType="com.liangyt.entity.datasourceone.DsOne">
+    update ds_one
+    set one = #{one,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, one
+    from ds_one
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, one
+    from ds_one
+  </select>
+</mapper>
