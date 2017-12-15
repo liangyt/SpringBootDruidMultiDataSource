@@ -1,7 +1,5 @@
 package com.liangyt.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.mysql.jdbc.jdbc2.optional.MysqlXADataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -15,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * 描述：数据源two
@@ -25,13 +24,6 @@ import javax.sql.DataSource;
 @Configuration
 @MapperScan(basePackages = "com.liangyt.mapper.two", sqlSessionTemplateRef = "sqlSessionTemplateTwo")
 public class DataSourceTwoConfig {
-
-    @Bean(name = "dataSourceTwo")
-    @ConfigurationProperties("spring.datasource.druid.two")
-    public DataSource dataSourceTwo() {
-        return DruidDataSourceBuilder.create().build();
-    }
-
     @Bean("sqlSessionFactoryTwo")
     public SqlSessionFactory sqlSessionFactoryTwo(@Qualifier("dataSourceTwo") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();

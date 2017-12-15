@@ -1,14 +1,12 @@
 package com.liangyt.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
-import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 import com.mysql.jdbc.jdbc2.optional.MysqlXADataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jta.atomikos.AtomikosDataSourceBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +15,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
+import java.util.Properties;
 
 /**
  * 描述：数据源one
@@ -27,14 +26,6 @@ import javax.sql.DataSource;
 @Configuration
 @MapperScan(basePackages = "com.liangyt.mapper.one", sqlSessionTemplateRef = "sqlSessionTemplateOne")
 public class DataSourceOneConfig {
-
-    @Primary
-    @Bean(name = "dataSourceOne")
-    @ConfigurationProperties("spring.datasource.druid.one")
-    public DataSource dataSourceOne() {
-        return DruidDataSourceBuilder.create().build();
-    }
-
     @Primary
     @Bean("sqlSessionFactoryOne")
     public SqlSessionFactory sqlSessionFactoryOne(@Qualifier("dataSourceOne") DataSource dataSource) throws Exception {
@@ -53,5 +44,4 @@ public class DataSourceOneConfig {
     public SqlSessionTemplate sqlSessionTemplateOne(@Qualifier("sqlSessionFactoryOne") SqlSessionFactory sqlSessionFactory) throws Exception {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
-
 }

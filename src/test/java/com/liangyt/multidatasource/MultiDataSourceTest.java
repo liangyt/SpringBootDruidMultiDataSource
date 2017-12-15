@@ -33,4 +33,9 @@ public class MultiDataSourceTest {
 
         multiDataSourceService.insert(dsOne, dsTwo);
     }
+
+    @Test
+    public void testList() {
+        System.out.println(multiDataSourceService.list());
+    }
 }

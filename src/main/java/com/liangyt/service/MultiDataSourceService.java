@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Objects;
+
 /**
  * 描述：服务类
  * 创建时间 2017-12-14 10:50
@@ -27,4 +30,16 @@ public class MultiDataSourceService {
         dsTwoMapper.insert(dsTwo);
     }
 
+    /**
+     * 返回两个表的数据
+     * @return
+     */
+    public List list() {
+        List one = dsOneMapper.selectAll();
+        List two = dsTwoMapper.selectAll();
+
+        if (Objects.nonNull(one) && Objects.nonNull(two)) one.addAll(two);
+        else one = two;
+        return one;
+    }
 }
